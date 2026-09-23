@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { FileText, CheckSquare, Folder, Clock } from 'lucide-react';
+import { FileText, CheckSquare, Folder, Clock, Workflow } from 'lucide-react';
 
 interface HeaderProps {
   proceduresCount: number;
   checklistsCount: number;
   cmpcCount: number;
+  flowchartsCount?: number;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   proceduresCount,
   checklistsCount,
-  cmpcCount
+  cmpcCount,
+  flowchartsCount = 11
 }) => {
   const [currentTime, setCurrentTime] = useState<string>(() => {
     return new Date().toLocaleTimeString('es-CL', {
@@ -111,11 +113,11 @@ export const Header: React.FC<HeaderProps> = ({
 
               <div className="hidden sm:flex items-center gap-3 px-3.5 py-2 rounded-xl bg-white/10 border border-white/15 backdrop-blur-md shadow-xs">
                 <div className="p-2 rounded-lg bg-amber-500/20 text-amber-300">
-                  <Folder className="w-4 h-4" />
+                  <Workflow className="w-4 h-4" />
                 </div>
                 <div className="text-left">
-                  <div className="text-xs font-bold text-white">{cmpcCount}</div>
-                  <div className="text-[10px] text-amber-200 uppercase tracking-wider">Fichas CMPC</div>
+                  <div className="text-xs font-bold text-white">{flowchartsCount}</div>
+                  <div className="text-[10px] text-amber-200 uppercase tracking-wider">Flujogramas</div>
                 </div>
               </div>
             </div>

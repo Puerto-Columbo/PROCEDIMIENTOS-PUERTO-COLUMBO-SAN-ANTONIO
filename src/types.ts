@@ -1,3 +1,5 @@
+export type TabType = 'procedure' | 'checklist' | 'flowchart';
+
 export interface DocumentItem {
   id: string | number;
   code: string;
@@ -36,3 +38,44 @@ export interface PreviewDocumentState {
   category: string;
   code?: string;
 }
+
+export interface FlowLane {
+  id: string;
+  name: string;
+  color: string;
+}
+
+export interface FlowNode {
+  id: string;
+  label: string;
+  type: 'start' | 'task' | 'decision' | 'end';
+  laneId: string;
+  x: number;
+  y: number;
+  description?: string;
+}
+
+export interface FlowConnection {
+  from: string;
+  to: string;
+  label?: string;
+  condition?: 'yes' | 'no';
+}
+
+export interface FlowchartItem {
+  id: string;
+  code: string;
+  title: string;
+  category: string;
+  date: string;
+  description: string;
+  lanes: FlowLane[];
+  nodes: FlowNode[];
+  connections: FlowConnection[];
+  subprocesses: {
+    name: string;
+    description: string;
+    steps: string[];
+  }[];
+}
+

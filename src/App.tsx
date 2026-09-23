@@ -8,11 +8,13 @@ import { CmpcFolderCard } from './components/CmpcFolderCard';
 import { PreviewModal } from './components/PreviewModal';
 import { Toast } from './components/Toast';
 import { Footer } from './components/Footer';
+import { FlowchartViewer } from './components/FlowchartViewer';
 import { PROCEDURES_DATA, CHECKLISTS_DATA, INITIAL_CMPC_DOCS } from './data/procedures';
-import { PreviewDocumentState, DocumentItem } from './types';
+import { FLOWCHARTS_DATA } from './data/flowcharts';
+import { PreviewDocumentState, DocumentItem, TabType } from './types';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'procedure' | 'checklist'>('procedure');
+  const [activeTab, setActiveTab] = useState<TabType>('procedure');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -41,10 +43,11 @@ export default function App() {
     return cats.sort();
   }, [currentDataset]);
 
-  // Reset category if not in new tab's categories
-  const handleTabChange = (tab: 'procedure' | 'checklist') => {
+  // Reset category if switching tabs
+  const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
     setSelectedCategory('all');
+    setSearchQuery('');
   };
 
   // Filter items based on active search and category
@@ -110,6 +113,7 @@ export default function App() {
         proceduresCount={PROCEDURES_DATA.length}
         checklistsCount={CHECKLISTS_DATA.length}
         cmpcCount={INITIAL_CMPC_DOCS.length}
+        flowchartsCount={FLOWCHARTS_DATA.length}
       />
 
       {/* Main Workspace */}
@@ -125,68 +129,77 @@ export default function App() {
           categories={categories}
           proceduresCount={PROCEDURES_DATA.length}
           checklistsCount={CHECKLISTS_DATA.length}
+          flowchartsCount={FLOWCHARTS_DATA.length}
           totalFiltered={filteredItems.length}
           totalItems={currentDataset.length}
           onResetFilters={handleResetFilters}
         />
 
-        {/* Document Cards Grid */}
-        <div className="space-y-4">
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => {
-              if (item.isFolder) {
+        {/* Tab Content Display */}
+        {activeTab === 'flowchart' ? (
+          <FlowchartViewer
+            flowcharts={FLOWCHARTS_DATA}
+            onToast={showToast}
+          />
+        ) : (
+          /* Document Cards Grid */
+          <div className="space-y-4">
+            <AnimatePresence mode="popLayout">
+              {filteredItems.map((item, index) => {
+                if (item.isFolder) {
+                  return (
+                    <CmpcFolderCard
+                      key={item.id}
+                      item={item}
+                      subItems={INITIAL_CMPC_DOCS}
+                      index={index}
+                      onPreview={handleOpenPreview}
+                      onToast={showToast}
+                    />
+                  );
+                }
+
                 return (
-                  <CmpcFolderCard
+                  <ItemCard
                     key={item.id}
                     item={item}
-                    subItems={INITIAL_CMPC_DOCS}
                     index={index}
                     onPreview={handleOpenPreview}
                     onToast={showToast}
                   />
                 );
-              }
+              })}
+            </AnimatePresence>
 
-              return (
-                <ItemCard
-                  key={item.id}
-                  item={item}
-                  index={index}
-                  onPreview={handleOpenPreview}
-                  onToast={showToast}
-                />
-              );
-            })}
-          </AnimatePresence>
-
-          {/* Empty Search State */}
-          {filteredItems.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.25 }}
-              className="bg-white rounded-2xl border border-slate-200 p-10 sm:p-14 text-center shadow-xs"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center mx-auto mb-4">
-                <SearchX className="w-7 h-7" />
-              </div>
-              <h3 className="text-base sm:text-lg font-bold text-slate-800">
-                No se encontraron documentos
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mt-1 mb-5 leading-relaxed">
-                No existen registros que coincidan con los criterios de búsqueda o el departamento seleccionado.
-              </p>
-              <button
-                type="button"
-                onClick={handleResetFilters}
-                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-xl bg-[#003B6F] hover:bg-[#00264A] text-white transition-all shadow-xs cursor-pointer"
+            {/* Empty Search State */}
+            {filteredItems.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.25 }}
+                className="bg-white rounded-2xl border border-slate-200 p-10 sm:p-14 text-center shadow-xs"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Restablecer Filtros</span>
-              </button>
-            </motion.div>
-          )}
-        </div>
+                <div className="w-14 h-14 rounded-2xl bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center mx-auto mb-4">
+                  <SearchX className="w-7 h-7" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-800">
+                  No se encontraron documentos
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mt-1 mb-5 leading-relaxed">
+                  No existen registros que coincidan con los criterios de búsqueda o el departamento seleccionado.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleResetFilters}
+                  className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-xl bg-[#003B6F] hover:bg-[#00264A] text-white transition-all shadow-xs cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Restablecer Filtros</span>
+                </button>
+              </motion.div>
+            )}
+          </div>
+        )}
       </main>
 
       {/* Corporate Footer */}
