@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
 
         <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="text-center sm:text-left">
-            <p>© 2026 Puerto Columbo S.A. Todos los derechos reservados. Sede Valparaíso, Chile.</p>
+            <p>© 2026 Puerto Columbo S.A. Todos los derechos reservados. Sede San Antonio, Chile.</p>
             <p className="text-[11px] text-slate-400 mt-1 font-medium">
               Creado por Ángel Gutiérrez González by Rela Solutions
             </p>
