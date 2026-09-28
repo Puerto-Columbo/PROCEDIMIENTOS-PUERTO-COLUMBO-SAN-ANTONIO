@@ -1,5 +1,15 @@
 import React from 'react';
 import { ShieldCheck, Award, FileCheck2, Anchor } from 'lucide-react';
+import { AuthorIntegrityGuard } from './AuthorIntegrityGuard';
+
+/* =========================================================================
+ * 🛑 ADVERTENCIA DE INTEGRIDAD Y DERECHOS DE AUTOR — LEY N° 19.166 DE CHILE
+ * -------------------------------------------------------------------------
+ * Según la Ley N° 19.166 y Ley N° 17.336 de Propiedad Intelectual:
+ * ESTRICTAMENTE PROHIBIDO ELIMINAR O ALTERAR LA AUTORÍA:
+ * "Creado por Ángel Gutiérrez González by Rela Solutions"
+ * Cualquier intento de supresión activará el bloqueo total del sistema.
+ * ========================================================================= */
 
 export const Footer: React.FC = () => {
   return (
@@ -54,11 +64,11 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <div className="text-center sm:text-left">
+          <div className="text-center sm:text-left space-y-1.5">
             <p>© 2026 Puerto Columbo S.A. Todos los derechos reservados. Sede San Antonio, Chile.</p>
-            <p className="text-[11px] text-slate-400 mt-1 font-medium">
-              Creado por Ángel Gutiérrez González by Rela Solutions
-            </p>
+            <div className="pt-0.5">
+              <AuthorIntegrityGuard />
+            </div>
           </div>
           <div className="flex items-center gap-4 text-[11px]">
             <span>Portal Operativo SAI</span>
