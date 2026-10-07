@@ -49,6 +49,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
     if (combined.includes('cfs')) return Building;
     if (combined.includes('bodega')) return Package;
     if (combined.includes('control documentos')) return FileCheck;
+    if (combined.includes('control de gestión') || combined.includes('arriendo')) return Layers;
     if (combined.includes('sag')) return ShieldCheck;
     if (combined.includes('control room')) return Monitor;
     if (combined.includes('reefer')) return Snowflake;

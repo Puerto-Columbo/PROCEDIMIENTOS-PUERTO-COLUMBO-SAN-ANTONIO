@@ -45,6 +45,9 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({
 
   // Transform URL into embeddable preview format
   const getEmbedUrl = (rawUrl: string): string => {
+    if (rawUrl.startsWith('/') || rawUrl.startsWith('data:') || rawUrl.startsWith('blob:')) {
+      return rawUrl;
+    }
     if (rawUrl.includes('drive.google.com')) {
       return rawUrl.replace('/view', '/preview');
     }

@@ -343,6 +343,27 @@ export const PROCEDURES_DATA: DocumentItem[] = [
     badge: "CARPETA DE PROCEDIMIENTOS & FICHAS",
     description: "Colección integral de 9 fichas técnicas y procedimientos específicos para la recepción, preparación, picking y despacho de productos forestales y celulosa CMPC.",
     pdfUrl: "https://drive.google.com/file/d/1m5Or0FdKL71oXVVM9Yjjj6Z_VY6RAkia/view?usp=sharing"
+  },
+  {
+    id: 18,
+    code: "POE-OP-001",
+    title: "Procedimiento Operativo de Gestión, Arriendo y Devoluciones de Contenedores",
+    category: "Control de Gestión",
+    date: "22-09-2026 • Versión 000",
+    type: "procedure",
+    fileType: "pdf",
+    description: "Establece los lineamientos y directrices estandarizadas para el requerimiento, control sistemático y devolución de contenedores arrendados. Centraliza la administración de los equipos, asegura la trazabilidad en el sistema XPS (evitando planillas manuales informales), optimiza los costos de arriendo y almacenaje, y previene contingencias en auditorías aduaneras.",
+    steps: [
+      "Solicitud de Servicios: Comercial envía la solicitud a Operaciones con volumen y requerimientos (sin contactar proveedores). Bodega verifica si tiene espacio o contenedores en arriendo disponibles; de no haber, informa la necesidad de arrendar.",
+      "Gestión de Arriendo con Proveedor: Comercial informa a Almacén Patio la cantidad requerida. Patio gestiona con proveedor (Spacewise, Contekner, etc.) con al menos una semana de anticipación.",
+      "Ingreso y Registro Gate In: Gate Control registra Gate In en XPS. Para extensión de bodega, el Controlador solicita a Sistemas crear una ubicación específica (N° contenedor) asignada en la PR de carga suelta.",
+      "Tarja y Mutación de Carga: En trasvasijes o desconsolidados, el tarjador de Operaciones (CFS) genera la tarja en XPS registrando en observaciones el detalle de la mutación de la carga.",
+      "Actualización de Estado y Cliente: Comercial registra cliente en Administración OS ('Puerto Columbo' si está vacío o nombre del cliente si es Full). Bodega actualiza en Parámetros de contenedores el estado 'Vacío' o 'Full'.",
+      "Auditoría Semanal de Unidades Vacías: Al menos una vez por semana, el Controlador extrae la data de XPS identificando contenedores vacíos y remite un listado formal al área Comercial.",
+      "Plazo de Justificación y Devolución Automática: Comercial tiene plazo hasta el 25 de cada mes para justificar uso por negocio inminente o informar no utilización. Sin respuesta, se ejecuta devolución automática.",
+      "Devolución y Cierre Sistemático: Almacén Patio coordina entrega con proveedor; Porteo modifica OS y carga tramos; Gate Control ejecuta Gate Out y Controlador coordina con Sistemas la inactivación de la ubicación."
+    ],
+    pdfUrl: "/documents/POE-OP-001.html"
   }
 ];
 
