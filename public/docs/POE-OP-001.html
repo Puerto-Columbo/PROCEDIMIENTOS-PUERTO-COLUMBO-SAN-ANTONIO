@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POE-OP-001 | Procedimiento Operativo de Gestión, Arriendo y Devoluciones de Contenedores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #003B6F;
+      --primary-dark: #00264A;
+      --accent: #22c55e;
+      --amber: #d97706;
+      --border: #cbd5e1;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px;
+    }
+
+    .doc-container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      padding: 48px;
+    }
+
+    .toolbar {
+      max-width: 860px;
+      margin: 0 auto 16px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-print:hover {
+      background: var(--primary-dark);
+    }
+
+    .header-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 28px;
+    }
+
+    .header-table td {
+      border: 1.5px solid #00264A;
+      padding: 12px 16px;
+      vertical-align: middle;
+    }
+
+    .brand-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #003B6F;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-subtitle {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #0077b6;
+      margin-top: 2px;
+    }
+
+    .doc-main-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      text-align: center;
+      color: #00264A;
+      line-height: 1.35;
+      text-transform: uppercase;
+      padding: 16px 12px !important;
+      background: #f1f5f9;
+    }
+
+    .meta-box {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .meta-box strong {
+      color: #00264A;
+    }
+
+    .auth-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      margin-bottom: 32px;
+    }
+
+    .auth-table td {
+      border: 1.5px solid #00264A;
+      padding: 10px 12px;
+      font-size: 11px;
+      vertical-align: top;
+      width: 33.33%;
+    }
+
+    .auth-table .auth-role {
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #003B6F;
+      margin-bottom: 6px;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-controlled {
+      display: block;
+      margin: 28px auto;
+      max-width: 380px;
+      padding: 10px 18px;
+      border: 2px solid #ef4444;
+      border-radius: 8px;
+      text-align: center;
+      color: #b91c1c;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: #fef2f2;
+    }
+
+    .badge-controlled span {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #dc2626;
+      margin-top: 2px;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #00264A;
+      border-bottom: 2px solid #003B6F;
+      padding-bottom: 6px;
+      margin-top: 32px;
+      margin-bottom: 14px;
+    }
+
+    .section-content {
+      font-size: 13.5px;
+      color: #1e293b;
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .section-subtitle {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #003B6F;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    .resp-block {
+      background: #f8fafc;
+      border-left: 3.5px solid #003B6F;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+
+    .resp-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #00264A;
+      margin-bottom: 6px;
+    }
+
+    ul.proc-list {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin: 6px 0 10px 0;
+    }
+
+    ul.proc-list li {
+      font-size: 13px;
+      color: #334155;
+      margin-bottom: 5px;
+    }
+
+    .callout-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid var(--amber);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: #92400e;
+      font-weight: 600;
+    }
+
+    .table-changes {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 12px;
+    }
+
+    .table-changes th, .table-changes td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    .table-changes th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: #00264A;
+    }
+
+    .index-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 6px 16px;
+      margin: 14px 0 24px 0;
+      padding: 14px 18px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .footer-doc {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 11px;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+      .toolbar {
+        display: none;
+      }
+      .doc-container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div style="font-size: 12px; font-weight: 600; color: #475569;">
+      Documento Oficial Vigente • Puerto Columbo San Antonio
+    </div>
+    <button class="btn-print" onclick="window.print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Imprimir / Exportar PDF
+    </button>
+  </div>
+
+  <div class="doc-container">
+    <!-- Header Document Table -->
+    <table class="header-table">
+      <tr>
+        <td style="width: 28%; text-align: center;">
+          <div class="brand-logo">
+            <div class="brand-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
+              PUERTO COLUMBO
+            </div>
+            <div class="brand-subtitle">D&C EXTRAPORTUARIO</div>
+          </div>
+        </td>
+        <td style="width: 44%;">
+          <div class="doc-main-title">
+            Procedimiento Operativo de Gestión, Arriendo y Devoluciones de Contenedores
+          </div>
+        </td>
+        <td style="width: 28%;">
+          <div class="meta-box">
+            <div><strong>Código:</strong> POE-OP-001</div>
+            <div><strong>Número Versión:</strong> 000</div>
+            <div><strong>Año:</strong> 2026</div>
+            <div><strong>Páginas:</strong> 6</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Authorization Table -->
+    <table class="auth-table">
+      <tr>
+        <td>
+          <div class="auth-role">EMITE</div>
+          <div><strong>Nombre:</strong> M. Silva</div>
+          <div><strong>Fecha:</strong> 22-09-2026</div>
+          <div><strong>Firma:</strong> Conforme</div>
+        </td>
+        <td>
+          <div class="auth-role">REVISA Y APRUEBA</div>
+          <div><strong>Nombre:</strong> J. Acuña</div>
+          <div><strong>Fecha:</strong> 22-09-2026</div>
+          <div><strong>Firma:</strong> Conforme</div>
+        </td>
+        <td>
+          <div class="auth-role">REVISA Y APRUEBA</div>
+          <div><strong>Nombre:</strong> L. Muñoz</div>
+          <div><strong>Fecha:</strong> 22-09-2026</div>
+          <div><strong>Firma:</strong> Conforme</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="auth-role">REVISA Y APRUEBA</div>
+          <div><strong>Nombre:</strong> F. Riffo</div>
+          <div><strong>Fecha:</strong> 22-09-2026</div>
+          <div><strong>Firma:</strong> Conforme</div>
+        </td>
+        <td colspan="2">
+          <div class="auth-role">REVISA Y APRUEBA</div>
+          <div><strong>Nombre:</strong> R. Mancilla</div>
+          <div><strong>Fecha:</strong> 22-09-2026</div>
+          <div><strong>Firma:</strong> Conforme</div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Controlled Copy Banner -->
+    <div class="badge-controlled">
+      COPIA CONTROLADA
+      <span>“Documento impreso es copia No controlada”</span>
+    </div>
+
+    <!-- Index -->
+    <div class="section-title">ÍNDICE</div>
+    <div class="index-list">
+      <div>1. OBJETO</div>
+      <div>2. CAMPO DE APLICACIÓN</div>
+      <div>3. NORMAS Y REFERENCIAS</div>
+      <div>4. DEFINICIONES Y/O ABREVIATURAS</div>
+      <div>5. ENTIDADES AFECTADAS</div>
+      <div>6. MÉTODO</div>
+      <div>7. REGISTROS</div>
+      <div>8. ANEXOS</div>
+      <div>9. CONTROL DE CAMBIOS</div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section-title">1. OBJETO</div>
+    <div class="section-content">
+      Establecer los lineamientos y directrices estandarizadas para el requerimiento, control sistemático y devolución de contenedores arrendados. Este procedimiento busca centralizar la administración de los equipos, asegurar la trazabilidad en el sistema XPS (evitando el uso de planillas manuales informales), optimizar los costos de arriendo y almacenaje, y prevenir contingencias en auditorías aduaneras.
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section-title">2. CAMPO DE APLICACIÓN</div>
+    <div class="section-content">
+      Aplica al área de Customer Service, Almacén Bodega, Almacén Patio, Control de Gestión de Puerto Columbo S.A., incluyendo personal de empresas contratistas, subcontratistas, proveedores de productos y servicios.
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section-title">3. NORMAS Y REFERENCIAS</div>
+    <div class="section-content">
+      El presente procedimiento no considera normas y/o referencias.
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section-title">4. DEFINICIONES Y/O ABREVIATURAS</div>
+    <div class="section-content">
+      El presente procedimiento no considera definiciones y/o abreviaturas.
+    </div>
+
+    <!-- Section 5 -->
+    <div class="section-title">5. MÉTODO</div>
+
+    <div class="section-subtitle">5.1 RESPONSABILIDADES</div>
+
+    <div class="resp-block">
+      <div class="resp-title">Control de Gestión (Controlador):</div>
+      <ul class="proc-list">
+        <li>Gestionar con el Área de Sistemas la activación o desactivación de ubicaciones.</li>
+        <li>Auditar constantemente el sistema XPS para detectar contenedores en estado “Vacío”.</li>
+        <li>Mantener comunicación constante con las áreas involucradas respecto al estado de los contenedores.</li>
+      </ul>
+    </div>
+
+    <div class="resp-block">
+      <div class="resp-title">Área Comercial (Customer Service):</div>
+      <ul class="proc-list">
+        <li>Solicitar servicios (consolidado/trasvasije/desconsolidado) directamente a Operaciones, sin gestionar contenedores directamente con los proveedores.</li>
+        <li>Responder dentro del plazo estipulado dentro del procedimiento a las notificaciones del área de control sobre contenedores vacíos.</li>
+        <li>Abstenerse de retener contenedores “por si acaso” si no existe un negocio cerrado inminente.</li>
+      </ul>
+    </div>
+
+    <div class="resp-block">
+      <div class="resp-title">Almacén Bodega:</div>
+      <ul class="proc-list">
+        <li>Modificar en sistema, en el campo de observaciones, si el contenedor se encuentra Full o Vacío.</li>
+        <li>Informar oportunamente al área de control sobre la liberación de equipos físicos.</li>
+      </ul>
+    </div>
+
+    <div class="resp-block">
+      <div class="resp-title">CFS:</div>
+      <ul class="proc-list">
+        <li>Ejecutar los movimientos físicos de los contenedores y faenas y registrar las tarjas en el sistema XPS al momento exacto de la operación.</li>
+      </ul>
+    </div>
+
+    <div class="resp-block">
+      <div class="resp-title">Almacén Patio:</div>
+      <ul class="proc-list">
+        <li>Gestionar arriendo y devolución de las unidades.</li>
+      </ul>
+    </div>
+
+    <div class="section-subtitle">5.2 DESCRIPCIÓN DE LAS ETAPAS DEL PROCESO</div>
+
+    <div class="resp-title" style="margin-top: 14px; color: #003B6F;">5.2.1 Solicitud de Contenedores y Servicios</div>
+    <ul class="proc-list">
+      <li>El Área Comercial cierra un negocio que requiere extensión de bodega o trasvasije. Comercial envía la solicitud del servicio a Operaciones, indicando el volumen y requerimientos, sin contactar a proveedores de contenedores.</li>
+      <li>Almacén Bodega debe corroborar primero, si tiene espacio en bodega para almacenar la carga, en caso de no ser así, se debe revisar si hay contenedores en arriendo disponible, y en caso de no ser así, Bodega informa a Comercial que no hay espacio, por lo que, se debe proceder a arrendar contenedores.</li>
+      <li>Área Comercial debe informar a Área de Almacén Patio la cantidad de contenedores que se deben arrendar.</li>
+      <li>Almacén Patio debe gestionar con proveedor (Spacewise, Contekner, etc.) el arriendo y retiro del contenedor.</li>
+    </ul>
+
+    <div class="callout-box">
+      Importante: Se debe solicitar el arriendo de la unidad, a lo menos, con una semana de anticipación.
+    </div>
+
+    <div class="resp-title" style="margin-top: 14px; color: #003B6F;">5.2.2 Ingreso, Trazabilidad Sistemática y Resguardo</div>
+    <ul class="proc-list">
+      <li>Al ingresar el contenedor arrendado, Gate Control debe registrar el Gate In en el sistema XPS.</li>
+      <li>Para contenedores destinados a extensión de bodega, el Controlador solicitará a Sistemas la creación de una ubicación específica (N° de contenedor). El contenedor se asignará a esta ubicación para separar claramente la “carga suelta” almacenada y evitar confusiones en auditorías aduaneras con cargas de exportación/tránsito. Esta información debe registrarse en la PR de carga suelta (Modificar Ubicación).</li>
+      <li>Al realizar un trasvasije o desconsolidado, el tarjador de Operaciones (CFS) debe generar la tarja en el sistema, agregando en el campo de “Observaciones” el detalle de la mutación de la carga.</li>
+      <li>Es de carácter imperativo que el área Comercial junto al área de Almacén Bodega modifique el estado de contenedor arrendado en sistema. El área Comercial debe modificar lo siguiente: En caso que el contenedor esté vacío, se debe registrar como cliente “Puerto Columbo”. Para los contenedores Full, en cliente se debe registrar, ya sea, extensión de bodega en caso de la carga retenida, y en caso que el contenedor tenga carga de cliente, se debe registrar el nombre del cliente, y esto debe realizarse en Administración OS.</li>
+      <li>El área de Almacén Bodega, debe modificar en el campo de observaciones de Parámetros de contenedores, si el contenedor se encuentra “Vacío” o “Full”.</li>
+    </ul>
+
+    <div class="resp-title" style="margin-top: 14px; color: #003B6F;">5.2.3 Proceso de Devolución y Cierre de Cobros</div>
+    <ul class="proc-list">
+      <li>Al menos una vez por semana, el Controlador extraerá la data del sistema XPS identificando todos los contenedores arrendados en estado “Vacío”.</li>
+      <li>El Controlador enviará un listado formal al área Comercial consultando la liberación definitiva de estos equipos.</li>
+      <li>El área Comercial tiene un plazo hasta el 25 de cada mes para reclamar el uso de un contenedor vacío justificando un negocio inminente, o bien, informar la no utilización del contenedor. En caso de no haber respuesta, se procederá con la devolución automática de la unidad.</li>
+      <li>El área de Almacén Patio informará al proveedor (Spacewise, Contekner, etc.) sobre la devolución de la unidad, solicitando el lugar de entrega y gestionando la misma. La modificación de la OS y la carga de los tramos lo realizará el área de porteo una vez que el proveedor haya confirmado el lugar de entrega del contenedor vacío.</li>
+      <li>Gate Control ejecuta la salida física (Gate Out). Inmediatamente, el Controlador coordina con Sistemas la eliminación/inactivación de la ubicación sistemática creada, asegurando el cese definitivo de la facturación por arriendo y almacenaje.</li>
+    </ul>
+
+    <!-- Section 6 -->
+    <div class="section-title">6. REGISTROS</div>
+    <div class="section-content">
+      El presente procedimiento no considera registros.
+    </div>
+
+    <!-- Section 7 -->
+    <div class="section-title">7. ANEXOS</div>
+    <div class="section-content">
+      El presente procedimiento no considera anexos.
+    </div>
+
+    <!-- Section 8 -->
+    <div class="section-title">8. CONTROL DE CAMBIOS</div>
+    <table class="table-changes">
+      <thead>
+        <tr>
+          <th style="width: 20%;">Versión</th>
+          <th>Descripción</th>
+          <th style="width: 25%;">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>000</strong></td>
+          <td>Creación del documento</td>
+          <td>22-09-2026</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer-doc">
+      <span>Puerto Columbo San Antonio • Sistema de Control Operativo</span>
+      <span>Código: POE-OP-001 | Versión: 000 | Página 6 de 6</span>
+    </div>
+  </div>
+
+</body>
+</html>

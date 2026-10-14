@@ -66,7 +66,10 @@ export const ItemCard: React.FC<ItemCardProps> = ({
 
   const handleCopyLink = () => {
     if (item.pdfUrl) {
-      navigator.clipboard.writeText(item.pdfUrl);
+      const fullUrl = item.pdfUrl.startsWith('/')
+        ? `${window.location.origin}${item.pdfUrl}`
+        : item.pdfUrl;
+      navigator.clipboard.writeText(fullUrl);
       setCopied(true);
       onToast(`Enlace copiado: ${item.title}`);
       setTimeout(() => setCopied(false), 2000);

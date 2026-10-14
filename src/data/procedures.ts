@@ -343,6 +343,29 @@ export const PROCEDURES_DATA: DocumentItem[] = [
     badge: "CARPETA DE PROCEDIMIENTOS & FICHAS",
     description: "Colección integral de 9 fichas técnicas y procedimientos específicos para la recepción, preparación, picking y despacho de productos forestales y celulosa CMPC.",
     pdfUrl: "https://drive.google.com/file/d/1m5Or0FdKL71oXVVM9Yjjj6Z_VY6RAkia/view?usp=sharing"
+  },
+  {
+    id: 18,
+    code: "POE-OP-001",
+    title: "Procedimiento Operativo de Gestión, Arriendo y Devoluciones de Contenedores",
+    category: "Control de Gestión",
+    date: "22-09-2026 • Versión 000",
+    type: "procedure",
+    fileType: "pdf",
+    description: "Establecer los lineamientos y directrices estandarizadas para el requerimiento, control sistemático y devolución de contenedores arrendados. Centraliza la administración de equipos, asegura la trazabilidad en el sistema XPS, optimiza costos de arriendo y almacenaje, y previene contingencias en auditorías aduaneras.",
+    steps: [
+      "Solicitud de servicios por Comercial y corroboración de disponibilidad física de espacio en Almacén Bodega antes de proceder a arrendar unidades.",
+      "Almacén Patio gestiona el arriendo y retiro del contenedor con el proveedor (Spacewise, Contekner, etc.) con al menos una semana de anticipación.",
+      "Registro inmediato de Gate In en el sistema XPS por Gate Control al ingresar el contenedor arrendado al terminal.",
+      "Controlador solicita a Sistemas la creación de ubicación específica en XPS para extensión de bodega y registro en PR de carga suelta.",
+      "Tarjador de Operaciones (CFS) genera tarja en XPS ante trasvasije o desconsolidado agregando en Observaciones el detalle de la mutación de la carga.",
+      "Actualización imperativa en Administración OS (cliente Puerto Columbo si está vacío, o nombre del cliente/extensión si está Full) y en Parámetros de contenedores.",
+      "Auditoría semanal del sistema XPS por el Controlador identificando contenedores en estado Vacío y envío de listado formal a Comercial.",
+      "Plazo para Comercial hasta el 25 de cada mes para justificar uso por negocio inminente o confirmar no utilización; sin respuesta se procede a devolución automática.",
+      "Almacén Patio informa al proveedor sobre devolución y solicita lugar de entrega; Porteo modifica la OS y carga los tramos tras confirmación del proveedor.",
+      "Ejecución de salida física (Gate Out) por Gate Control e inactivación/eliminación de la ubicación en XPS por el Controlador para cese definitivo de cobros."
+    ],
+    pdfUrl: "/docs/POE-OP-001.html"
   }
 ];
 

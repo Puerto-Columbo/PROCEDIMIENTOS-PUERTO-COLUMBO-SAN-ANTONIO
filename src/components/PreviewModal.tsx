@@ -58,7 +58,8 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(url);
+    const fullUrl = url.startsWith('/') ? `${window.location.origin}${url}` : url;
+    navigator.clipboard.writeText(fullUrl);
     setCopied(true);
     onToast('Enlace copiado al portapapeles');
     setTimeout(() => setCopied(false), 2000);
