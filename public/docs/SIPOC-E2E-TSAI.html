@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIPOC-E2E-TSAI | PUERTO COLUMBO - MATRIZ SIPOC END-TO-END TSAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #003B6F;
+      --primary-dark: #00264A;
+      --border: #cbd5e1;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      padding: 20px 16px;
+    }
+
+    .toolbar {
+      max-width: 1560px;
+      margin: 0 auto 14px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-print:hover {
+      background: var(--primary-dark);
+    }
+
+    .doc-container {
+      max-width: 1560px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      padding: 28px 28px 24px 28px;
+    }
+
+    .doc-header {
+      margin-bottom: 18px;
+    }
+
+    .doc-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.3px;
+      line-height: 1.25;
+    }
+
+    .doc-subtitle {
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid #94a3b8;
+      border-radius: 6px;
+    }
+
+    table.sipoc-table {
+      width: 100%;
+      min-width: 1220px;
+      border-collapse: collapse;
+      font-size: 11px;
+      background: #ffffff;
+    }
+
+    table.sipoc-table thead th {
+      background-color: #163a5f;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: center;
+      padding: 9px 7px;
+      border: 1px solid #2b4e72;
+      vertical-align: middle;
+      line-height: 1.3;
+    }
+
+    table.sipoc-table tbody td {
+      padding: 8px 7px;
+      border: 1px solid #cbd5e1;
+      vertical-align: middle;
+      color: #0f172a;
+      line-height: 1.38;
+    }
+
+    table.sipoc-table tbody tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    table.sipoc-table tbody tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    .col-id {
+      width: 34px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .col-fase {
+      width: 112px;
+      font-weight: 700;
+    }
+
+    .col-modulo {
+      width: 115px;
+    }
+
+    .col-proveedor {
+      width: 120px;
+    }
+
+    .col-input {
+      width: 130px;
+    }
+
+    .col-proceso {
+      width: 180px;
+    }
+
+    .col-output {
+      width: 140px;
+    }
+
+    .col-cliente {
+      width: 125px;
+    }
+
+    .col-sistema {
+      width: 105px;
+    }
+
+    .col-sla {
+      width: 125px;
+    }
+
+    .col-riesgo {
+      width: 185px;
+    }
+
+    .footer-doc {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 11px;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @page {
+      size: landscape;
+      margin: 8mm;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+      .toolbar {
+        display: none;
+      }
+      .doc-container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .table-wrapper {
+        overflow: visible;
+        border-radius: 0;
+      }
+      table.sipoc-table {
+        min-width: 100%;
+        font-size: 8.5px;
+      }
+      table.sipoc-table thead th,
+      table.sipoc-table tbody td {
+        padding: 4px 5px;
+      }
+      table.sipoc-table thead th {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div style="font-size: 12px; font-weight: 600; color: #475569;">
+      Documento Oficial Vigente • Puerto Columbo San Antonio
+    </div>
+    <button class="btn-print" onclick="window.print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Imprimir / Exportar PDF
+    </button>
+  </div>
+
+  <div class="doc-container">
+    <div class="doc-header">
+      <div class="doc-title">PUERTO COLUMBO - MATRIZ SIPOC END-TO-END TSAI</div>
+      <div class="doc-subtitle">Mapeo de Proveedores, Insumos, Procesos, Entregables y Clientes Internos por Módulo Operativo</div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="sipoc-table">
+        <thead>
+          <tr>
+            <th class="col-id">ID</th>
+            <th class="col-fase">Fase Cadena de Valor</th>
+            <th class="col-modulo">Módulo / Área</th>
+            <th class="col-proveedor">Proveedor Interno / Ext.</th>
+            <th class="col-input">Entregable de Entrada (Input)</th>
+            <th class="col-proceso">Proceso / Actividad Clave</th>
+            <th class="col-output">Entregable de Salida (Output)</th>
+            <th class="col-cliente">Cliente Interno / Ext.</th>
+            <th class="col-sistema">Sistema / Soporte (XPS)</th>
+            <th class="col-sla">SLA Objetivo</th>
+            <th class="col-riesgo">Punto de Fricción / Riesgo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-id">1</td>
+            <td class="col-fase">1. Planificación y Arribo</td>
+            <td class="col-modulo">Comercial &amp; Pricing</td>
+            <td class="col-proveedor">Gerencia Comercial / FFWW / Clientes</td>
+            <td class="col-input">Tarifas, rebates, condiciones de pago, volumen y acuerdos comerciales cargados en XPS</td>
+            <td class="col-proceso">Evaluación de margen (≥40%), creación de tipo de cliente en BD y carga de tarifas en XPS.</td>
+            <td class="col-output">Tarifas y Acuerdos Comerciales registrados en XPS.</td>
+            <td class="col-cliente">Customer Service, Control Documentos, Facturación.</td>
+            <td class="col-sistema">XPS Módulo Comercial</td>
+            <td class="col-sla">&lt; 24 hrs post-solicitud</td>
+            <td class="col-riesgo">Inconsistencia entre tarifas acordadas y cargadas en XPS.</td>
+          </tr>
+          <tr>
+            <td class="col-id">2</td>
+            <td class="col-fase">1. Planificación y Arribo</td>
+            <td class="col-modulo">Customer Service</td>
+            <td class="col-proveedor">Agencia Naviera / Cliente</td>
+            <td class="col-input">Orden de Servicio / Booking</td>
+            <td class="col-proceso">Recepción y creación de orden de atención en sistema ( Acuerdos comerciales..)</td>
+            <td class="col-output">Creación Orden de Servicio (OS) electrónica habilitada, para servicio comercial. En el caso de carga primaria se verifica (edita) OS.</td>
+            <td class="col-cliente">Control Documentos, Porteo, CFS, Bodega</td>
+            <td class="col-sistema">XPS / Portal CS</td>
+            <td class="col-sla">&lt; 30 min</td>
+            <td class="col-riesgo">Información incompleta de carga o aviso tardío del cliente. Lo anterior genera problema en la programación del servicio y/o errores en la facturación</td>
+          </tr>
+          <tr>
+            <td class="col-id">3</td>
+            <td class="col-fase">1. Planificación y Arribo</td>
+            <td class="col-modulo">Control Documentos</td>
+            <td class="col-proveedor">Naviera</td>
+            <td class="col-input">Manifiesto, BL´s</td>
+            <td class="col-proceso">Verificación documental, providencias aforos, elaboración de informes aduaneros</td>
+            <td class="col-output">Documentación Aprobada / Providencia</td>
+            <td class="col-cliente">Gate Control / CFS / Almacén Patio (Porteo)/CS/Aduana</td>
+            <td class="col-sistema">XPS / Sis. Documental/ Sistema Aduanero/Sistema Puerto</td>
+            <td class="col-sla">&lt; 48 hrs previa faena</td>
+            <td class="col-riesgo">Demoras en procesos internos (Otras áreas)</td>
+          </tr>
+          <tr>
+            <td class="col-id">4</td>
+            <td class="col-fase">1. Planificación y Arribo</td>
+            <td class="col-modulo">Porteo</td>
+            <td class="col-proveedor">Control Documentos y Portales de Puertos</td>
+            <td class="col-input">Contenedores manifestados</td>
+            <td class="col-proceso">Gestionar tarjetones para retiro de puerto y coordina los portedadores de puerto para retiro de unidades</td>
+            <td class="col-output">Tarjetones y secuencia de arribo de contenedores a TSAI</td>
+            <td class="col-cliente">Gate Control, Reefer, Control Room</td>
+            <td class="col-sistema">XPS/Portales de Puerto</td>
+            <td class="col-sla">&lt; 17 hrs aporx se gestiona 3er y 1er turno<br>&lt;10 am aporx se gestiona 2do turno</td>
+            <td class="col-riesgo">No retirar contenedores a tiempo</td>
+          </tr>
+          <tr>
+            <td class="col-id">5</td>
+            <td class="col-fase">2. Ingreso y Recepción</td>
+            <td class="col-modulo">Buffer / Acceso</td>
+            <td class="col-proveedor">Transportista Externo</td>
+            <td class="col-input">Agendamiento Sistema Buffer</td>
+            <td class="col-proceso">Control de flujo en zona de antepuerto (Buffer)</td>
+            <td class="col-output">Turno / Ticket de Ingreso Habilitado</td>
+            <td class="col-cliente">Gate Control</td>
+            <td class="col-sistema">XPS Buffer</td>
+            <td class="col-sla">&lt; 15 min</td>
+            <td class="col-riesgo">Verificación manual de patentes por falta de integración XPS-Buffer</td>
+          </tr>
+          <tr>
+            <td class="col-id">6</td>
+            <td class="col-fase">2. Ingreso y Recepción</td>
+            <td class="col-modulo">Gate Control</td>
+            <td class="col-proveedor">Buffer / Transportista/Control Documento/Porteo/CS</td>
+            <td class="col-input">Camión posicionado en Gate</td>
+            <td class="col-proceso">Inspección física (Sellos, daños y revisión documental) y registro Gate In</td>
+            <td class="col-output">Registro Gate In / Baroti Asignado</td>
+            <td class="col-cliente">Control Room / Patio</td>
+            <td class="col-sistema">XPS Gate in</td>
+            <td class="col-sla">&lt; 20 min por camión</td>
+            <td class="col-riesgo">Cuellos de botella en horas pico</td>
+          </tr>
+          <tr>
+            <td class="col-id">7</td>
+            <td class="col-fase">3. Almacenaje y Patio</td>
+            <td class="col-modulo">Control Room</td>
+            <td class="col-proveedor">Gate Control / Stacking/CFS/Bodega</td>
+            <td class="col-input">Registro Gate In / Secuencia de Stack</td>
+            <td class="col-proceso">Planificación y asignación de Baroti / Ubicación</td>
+            <td class="col-output">Ubicación final del contenedor</td>
+            <td class="col-cliente">Operadores Reach Stacker</td>
+            <td class="col-sistema">Baroti</td>
+            <td class="col-sla">Inmediato y/o planificado</td>
+            <td class="col-riesgo">Desacople entre secuencia planificada y posición real/solicitado</td>
+          </tr>
+          <tr>
+            <td class="col-id">8</td>
+            <td class="col-fase">3. Almacenaje y Patio</td>
+            <td class="col-modulo">Patio (Reach Stacker)</td>
+            <td class="col-proveedor">Control Room/Stacking</td>
+            <td class="col-input">Solicitud de Movimiento de Contendor / Baroti</td>
+            <td class="col-proceso">Traslado y posicionamiento de contenedor en patio</td>
+            <td class="col-output">Contenedor Ubicado / Baroti Confirmado</td>
+            <td class="col-cliente">CFS / Reefer / SAG/Almacén Patio/Bodega</td>
+            <td class="col-sistema"></td>
+            <td class="col-sla">&lt; 3 min por mvt</td>
+            <td class="col-riesgo">Disponibilidad de maquinaria / Congestión Interna/ Tiempos de traslado</td>
+          </tr>
+          <tr>
+            <td class="col-id">9</td>
+            <td class="col-fase">3. Almacenaje y Patio</td>
+            <td class="col-modulo">Reefer</td>
+            <td class="col-proveedor">Gate Control / Control Room/ Porteo/CS/Control Doc.</td>
+            <td class="col-input">Contenedor Reefer Posicionado</td>
+            <td class="col-proceso">Conexión, monitoreo de temperatura y suministro/Desconexión</td>
+            <td class="col-output">Planilla de Monitoreo / Alarma OK</td>
+            <td class="col-cliente">Customer Service/SAG/ Almacén Patio/CFS</td>
+            <td class="col-sistema">XPS Reefer</td>
+            <td class="col-sla">Conexión &lt; 10 min</td>
+            <td class="col-riesgo">Fallas en tomas eléctricas o discrepancias en setpoint</td>
+          </tr>
+          <tr>
+            <td class="col-id">10</td>
+            <td class="col-fase">4. Faenas CFS &amp; Bodega</td>
+            <td class="col-modulo">CFS (Consolidado/Descon.)</td>
+            <td class="col-proveedor">Customer Service/ Control Room //Agencia de Aduana (Ext)</td>
+            <td class="col-input">Contenedor en Posición / Providencia</td>
+            <td class="col-proceso">Apertura, desconsolidación, consolidación y tarja</td>
+            <td class="col-output">Tarja Electrónica</td>
+            <td class="col-cliente">Customer Service/Control Docs / Control Room/Bodega</td>
+            <td class="col-sistema">XPS CFS / Tarja Eléctr.</td>
+            <td class="col-sla">&lt; 24 hrs post solicitud de servicio</td>
+            <td class="col-riesgo">Cortes de horario rígidos (14:30/16:30) afectando planificación</td>
+          </tr>
+          <tr>
+            <td class="col-id">11</td>
+            <td class="col-fase">5. Faenas SAG</td>
+            <td class="col-modulo">Sitio SAG / Inspección</td>
+            <td class="col-proveedor">Control Room /Control Documento /Reefer/Almacén bodega// Agencia de Aduana</td>
+            <td class="col-input">Carga Posicionada para inspección SAG</td>
+            <td class="col-proceso">Inspección fitosanitaria y revisión SAG/Aduana</td>
+            <td class="col-output">Informe de Inspección de Productos Agropecuarios (IIPA))/Liberación</td>
+            <td class="col-cliente">Control Documentos / Customer Service/ Control Room/ Almacén Bodega /Reefer/Almacén patio</td>
+            <td class="col-sistema">Tarja manual / Sistema SAG</td>
+            <td class="col-sla">Según ventana SAG</td>
+            <td class="col-riesgo">Falta de camiones, atoche/congestión interna dentro del Terminal</td>
+          </tr>
+          <tr>
+            <td class="col-id">12</td>
+            <td class="col-fase">6. Faenas Bodega</td>
+            <td class="col-modulo">Almacén Bodega (N°2)</td>
+            <td class="col-proveedor">CFS/CS</td>
+            <td class="col-input">Carga desconsolidada / Carga recibida por camión.</td>
+            <td class="col-proceso">Almacenamiento, paletizado y resguardo en bodega.</td>
+            <td class="col-output">Papeleta de Recepción (PR) / Ubicación en Bodega.</td>
+            <td class="col-cliente">Control Documentos / Customer Service / Cliente</td>
+            <td class="col-sistema">XPS Bodega / Recepción no man.</td>
+            <td class="col-sla">Inmediato post-tarja</td>
+            <td class="col-riesgo">Saturación de capacidad cubierta y demoras en picking recepción indirecto.</td>
+          </tr>
+          <tr>
+            <td class="col-id">13</td>
+            <td class="col-fase">6. Faenas Bodega</td>
+            <td class="col-modulo">Almacén Bodega (N°2)</td>
+            <td class="col-proveedor">CFS /Customer Service</td>
+            <td class="col-input">Carga en bodega</td>
+            <td class="col-proceso">picking de carga y cubicación (m^3)</td>
+            <td class="col-output">Papeleta de Entrega (PE)</td>
+            <td class="col-cliente">Control Documentos / Customer Service / Transportista</td>
+            <td class="col-sistema">XPS Bodega / Despacho carga suelta</td>
+            <td class="col-sla">&lt; 24 hrs post-Solicitud de Servicio</td>
+            <td class="col-riesgo"></td>
+          </tr>
+          <tr>
+            <td class="col-id">14</td>
+            <td class="col-fase">6. Faenas Bodega</td>
+            <td class="col-modulo">Bodega despacho de carga suelta</td>
+            <td class="col-proveedor">Customer Service</td>
+            <td class="col-input">Carga en bodega</td>
+            <td class="col-proceso">picking de carga y cubicación (m^3)</td>
+            <td class="col-output">Papeleta de Entrega (PE)</td>
+            <td class="col-cliente">Control Documentos / Customer Service / Transportista</td>
+            <td class="col-sistema">XPS Bodega / Despacho carga suelta</td>
+            <td class="col-sla">&lt; 24 hrs post-Solicitud de Servicio</td>
+            <td class="col-riesgo"></td>
+          </tr>
+          <tr>
+            <td class="col-id">15</td>
+            <td class="col-fase">7. Despacho y Salida</td>
+            <td class="col-modulo">Almacén patio (Despacho Cliente)</td>
+            <td class="col-proveedor">Customer Service/Cliente</td>
+            <td class="col-input">Programación de retiro de unidades</td>
+            <td class="col-proceso">Buscar los documentos de llegada de los contenedores, verificar identidad del conductor y entregar todos los documentos para salir del terminal( guía de despacho, EIR, hoja de seguridad según corresponda, TACT)</td>
+            <td class="col-output">Listado de Contenedores a despachar</td>
+            <td class="col-cliente">Control Room/Buffer/Operador Porta/Gate Control</td>
+            <td class="col-sistema">XPS Patio</td>
+            <td class="col-sla">&lt; 17 hrs cierre de programación para el día siguiente<br>Considerar excepciones para extra cupos</td>
+            <td class="col-riesgo">Cambio en el requerimiento del cliente, tanto en la anulación del servicio, como en la reporgramación de este mismo</td>
+          </tr>
+          <tr>
+            <td class="col-id">16</td>
+            <td class="col-fase">7. Despacho y Salida</td>
+            <td class="col-modulo">Almacén patio (Despacho a Puerto)</td>
+            <td class="col-proveedor">Customer Service</td>
+            <td class="col-input">Solicitud del servicio (OS)/Solicitud vía correo electrónico</td>
+            <td class="col-proceso">Verificar que tramo esté asignado y que pago y visación estén aprobados</td>
+            <td class="col-output">Guía de traslado</td>
+            <td class="col-cliente">Porteo/Control Room/Gate Control/ Cliente/CS</td>
+            <td class="col-sistema">XPS Patio/Correo Electrónico</td>
+            <td class="col-sla">&lt; 24 hrs antes de inicio Stacking</td>
+            <td class="col-riesgo"></td>
+          </tr>
+          <tr>
+            <td class="col-id">17</td>
+            <td class="col-fase">7. Despacho y Salida</td>
+            <td class="col-modulo">Gate Out</td>
+            <td class="col-proveedor">Transportista</td>
+            <td class="col-input">Camión Cargado / PE / Guía Despacho</td>
+            <td class="col-proceso">Validación documental final, y revisión físca contenedor</td>
+            <td class="col-output">Registro Gate Out</td>
+            <td class="col-cliente">Transportista / Cliente Final</td>
+            <td class="col-sistema">XPS Gate Out</td>
+            <td class="col-sla">&lt; 5 min por camión</td>
+            <td class="col-riesgo">Demoras en revisión física y documental</td>
+          </tr>
+          <tr>
+            <td class="col-id">18</td>
+            <td class="col-fase">7. Despacho y Salida</td>
+            <td class="col-modulo">CS/ Control Docs</td>
+            <td class="col-proveedor">CFS / Bodega /Almacén Patio/ CS/Pricing</td>
+            <td class="col-input">Tarja Conforme / Servicios Realizados/Acuerdo Comercial Creado y aprobado(Pricing)</td>
+            <td class="col-proceso">Liquidación de tarifas y facturación emitida</td>
+            <td class="col-output">Factura emitida</td>
+            <td class="col-cliente">Cliente</td>
+            <td class="col-sistema">XPS Facturación / ERP</td>
+            <td class="col-sla">&lt; 48 hrs. ( Control Doc.)<br>menos de 5 días CS</td>
+            <td class="col-riesgo">Bloqueos por diferendos comerciales o falta de pago del cliente final</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer-doc">
+      <span>Puerto Columbo San Antonio • Sistema de Control Operativo</span>
+      <span>Código: SIPOC-E2E-TSAI | Página 1 de 1</span>
+    </div>
+  </div>
+
+</body>
+</html>

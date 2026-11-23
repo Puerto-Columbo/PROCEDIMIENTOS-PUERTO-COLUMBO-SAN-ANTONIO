@@ -366,6 +366,26 @@ export const PROCEDURES_DATA: DocumentItem[] = [
       "Ejecución de salida física (Gate Out) por Gate Control e inactivación/eliminación de la ubicación en XPS por el Controlador para cese definitivo de cobros."
     ],
     pdfUrl: "/docs/POE-OP-001.html"
+  },
+  {
+    id: 19,
+    code: "SIPOC-E2E-TSAI",
+    title: "Matriz SIPOC E2E Puerto Columbo TSAI",
+    category: "Control de Gestión",
+    date: "Actualizado • Vigente",
+    type: "procedure",
+    fileType: "pdf",
+    description: "Mapeo de Proveedores, Insumos, Procesos, Entregables y Clientes Internos por Módulo Operativo.",
+    steps: [
+      "1. Planificación y Arribo: Comercial & Pricing, Customer Service, Control Documentos y Porteo.",
+      "2. Ingreso y Recepción: Buffer / Acceso y Gate Control.",
+      "3. Almacenaje y Patio: Control Room, Patio (Reach Stacker) y Reefer.",
+      "4. Faenas CFS & Bodega: CFS (Consolidado/Descon.).",
+      "5. Faenas SAG: Sitio SAG / Inspección.",
+      "6. Faenas Bodega: Almacén Bodega (N°2) y Bodega despacho de carga suelta.",
+      "7. Despacho y Salida: Almacén patio (Despacho Cliente), Almacén patio (Despacho a Puerto), Gate Out y CS/ Control Docs."
+    ],
+    pdfUrl: "/docs/SIPOC-E2E-TSAI.html"
   }
 ];
 
